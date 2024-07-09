@@ -31,7 +31,7 @@ data "aws_iam_policy_document" "lambda" {
 
 resource "aws_iam_policy" "lambda_logging" {
   name        = "lambda"
-  path        = "/localstack"
+  path        = "/"
   description = "IAM policy for a lambda"
   policy      = data.aws_iam_policy_document.lambda.json
 }
@@ -42,7 +42,7 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
 }
 
 resource "aws_iam_role" "iam_for_lambda" {
-  name               = "iam_for_lambda"
+  name               = "catalog"
   assume_role_policy = data.aws_iam_policy_document.assume_role.json
 }
 

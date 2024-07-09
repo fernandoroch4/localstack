@@ -1,5 +1,6 @@
 resource "aws_s3_bucket" "temp" {
-  bucket = "temp"
+  bucket        = "temp"
+  force_destroy = true
 }
 
 resource "aws_s3_bucket_notification" "queue" {
