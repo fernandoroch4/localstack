@@ -2,11 +2,14 @@ import random
 from datetime import datetime
 import boto3
 import json
+from botocore.client import Config
 
 
 BUCKET_NAME = "temp"
-s3 = boto3.resource("s3", region_name="us-east-1", endpoint_url="http://localhost:4566")
-bucket = s3.Bucket(BUCKET_NAME)
+s3 = boto3.client(
+    "s3", aws_access_key_id="test", aws_secret_access_key="test", region_name="us-east-1", endpoint_url="http://localhost:4566", config=Config(s3={"addressing_style": "path"})
+)
+# bucket = s3.Bucket(BUCKET_NAME)
 
 queue_files = []
 default_files = []
@@ -33,12 +36,13 @@ def generate_key() -> str:
     return key
 
 
-def generate_data(client=bucket) -> None:
+def generate_data(client=s3) -> None:
     """Generate random data in the S3 bucket.
     :param client: The S3 client
     """
     for _ in range(random.randint(1, 10)):
         client.put_object(
+            Bucket=BUCKET_NAME,
             Body=str(random.random()).encode(),
             Key=generate_key(),
             ContentLength=random.randint(9999, 9999999999999),

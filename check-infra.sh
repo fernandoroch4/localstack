@@ -4,8 +4,8 @@ aws --endpoint-url=http://localhost:4566 s3 ls
 
 echo "\n"
 echo BUCKETS OBJECTS
-aws --endpoint-url=http://localhost:4566 s3 ls s3://temp/queue
-aws --endpoint-url=http://localhost:4566 s3 ls s3://temp/default
+aws --endpoint-url=http://localhost:4566 s3 ls s3://temp/queue/
+aws --endpoint-url=http://localhost:4566 s3 ls s3://temp/default/
 
 echo "\n"
 echo LAMBDA FUNCTIONS
